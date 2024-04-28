@@ -8,7 +8,7 @@ def torch_square_matmul_bench():
   batch_size = 10
   dims = [2**i for i in range(0, 14)]
 
-  for i in range(10):
+  for i in range(5):
     for dim in dims:
       print(f"Iteration {i}, Dim={dim}")
       x = torch.randn((batch_size, dim, dim), dtype=torch.float32)
@@ -57,11 +57,11 @@ def torch_square_matmul_bench():
 
   data_gpu_dtoh = ['GPU dtoh. ']
   for dim in dims:
-    key = f'GPU HtoD (M=K=N={dim})'
+    key = f'GPU DtoH (M=K=N={dim})'
     data_gpu_dtoh.append(raw_data[key])
   data.append(data_gpu_dtoh)
 
-  f = open('torch_matmul_square_cpu_vs_gpu.csv', 'w')
+  f = open('torch_matmul_square_cpu_vs_gpu_float32.csv', 'w')
   writer = csv.writer(f)
   writer.writerows(data)
   f.close()
