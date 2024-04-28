@@ -12,8 +12,8 @@ def npcp_square_matmul_bench():
   for i in range(5):
     for dim in dims:
       print(f"Iteration {i}, Dim={dim}")
-      x = np.random.randint(-128, 127, (batch_size, dim, dim), dtype=np.int32)
-      y = np.random.randint(-128, 127, (batch_size, dim, dim), dtype=np.int32)
+      x = np.random.randint(0, 127, (batch_size, dim, dim), dtype=np.uint32)
+      y = np.random.randint(0, 127, (batch_size, dim, dim), dtype=np.uint32)
 
       x_gpu = x.copy()
       y_gpu = y.copy()
@@ -64,7 +64,7 @@ def npcp_square_matmul_bench():
     data_gpu_dtoh.append(raw_data[key])
   data.append(data_gpu_dtoh)
 
-  f = open('numpy_cupy_matmul_square_cpu_vs_gpu_int32.csv', 'w')
+  f = open('numpy_cupy_matmul_square_cpu_vs_gpu_uint32.csv', 'w')
   writer = csv.writer(f)
   writer.writerows(data)
   f.close()
